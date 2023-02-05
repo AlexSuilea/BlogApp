@@ -73,8 +73,8 @@ public class PostServiceImpl implements PostService {
         postRepository.delete(post);
     }
 
-    private Post getPostByIdEntity(Long id) {
-        return postRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Post", "id", id));
+    public Post getPostByIdEntity(Long postId) {
+        return postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
     }
 
     private PostDto mapToDto(Post post) {
