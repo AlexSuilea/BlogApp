@@ -1,5 +1,6 @@
 package com.springboot.blog.service;
 
+import com.springboot.blog.domain.Post;
 import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.payload.PostResponse;
 
@@ -15,4 +16,6 @@ public interface PostService {
     PostDto updatePost(PostDto postDto, Long id);
 
     void deletePostById(Long id);
+
+    Post getPostByIdEntity(Long id);
 }
