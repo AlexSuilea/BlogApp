@@ -9,6 +9,7 @@ import com.springboot.blog.payload.PostDto;
 import com.springboot.blog.repository.CommentRepository;
 import com.springboot.blog.service.CommentService;
 import com.springboot.blog.service.PostService;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +20,12 @@ public class CommentServiceImpl implements CommentService {
 
     private final CommentRepository commentRepository;
     private final PostService postService;
+    private final ModelMapper mapper;
 
-    public CommentServiceImpl(CommentRepository commentRepository, PostService postService) {
+    public CommentServiceImpl(CommentRepository commentRepository, PostService postService, ModelMapper mapper) {
         this.commentRepository = commentRepository;
         this.postService = postService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -83,18 +86,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     private CommentDto mapToDTO(Comment comment) {
-        CommentDto commentDto = new CommentDto();
-        commentDto.setId(comment.getId());
-        commentDto.setName(comment.getName());
-        commentDto.setEmail(comment.getEmail());
-        commentDto.setBody(comment.getBody());
-        return commentDto;
+        return mapper.map(comment, CommentDto.class);
     }
 
     private Comment mapToEntity(CommentDto commentDto) {
-        Comment comment = new Comment();
-        setCommentEntity(commentDto, comment);
-        return comment;
+        return mapper.map(commentDto, Comment.class);
     }
 
     private void setCommentEntity(CommentDto commentDto, Comment comment) {

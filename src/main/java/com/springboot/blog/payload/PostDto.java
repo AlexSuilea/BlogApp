@@ -2,6 +2,8 @@ package com.springboot.blog.payload;
 
 import lombok.*;
 
+import java.util.Set;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -13,4 +15,5 @@ public class PostDto {
     private String title;
     private String description;
     private String content;
+    private Set<CommentDto> comments;
 }
