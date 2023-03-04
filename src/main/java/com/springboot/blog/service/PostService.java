@@ -18,4 +18,6 @@ public interface PostService {
     void deletePostById(Long id);
 
     Post getPostByIdEntity(Long id);
+
+    List<PostDto> getPostsByCategory(Long categoryId);
 }
